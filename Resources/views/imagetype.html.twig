@@ -1,0 +1,30 @@
+{% block cwd_image_type_widget %}
+    {% set imageSrc = form.vars.data %}
+    <div class="row">
+        <div class="col-md-{{ form.vars.attr.imagecols|default(2) }}">
+            <div class="fileinput fileinput-{% if imageSrc is not null %}exists{% else %}new{% endif %}" data-provides="fileinput" data-name="{{ form.vars.full_name }}">
+                <div class="fileinput-new thumbnail">
+                    <img src="http://www.placehold.it/200x200/EFEFEF/AAAAAA&amp;text={{ "no image"|trans }}" alt="" />
+                </div>
+                <div class="fileinput-preview fileinput-exists thumbnail">
+                    {% if imageSrc is not null and imageSrc.id is defined %}
+
+                        <img src="{{ imageSrc|cwdImage.cropResize(200,200) }}" />
+                        <input type="hidden" name="{{ form.vars.full_name }}" id="{{ form.vars.id }}" value="{{ imageSrc.id }}" />
+                    {% endif %}
+                </div>
+                <div>
+                    <span class="btn default btn-file">
+                        <span class="fileinput-new"> {{ "Select image"|trans }} </span>
+                        <span class="fileinput-exists"> {{ "Change"|trans }} </span>
+                        <input type="file">
+                    </span>
+                     <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> {{ "Reset"|trans }} </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-{{ form.vars.attr.buttoncols|default(2) }} editArea">
+
+        </div>
+    </div>
+{% endblock %}

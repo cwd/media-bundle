@@ -1,0 +1,20 @@
+services:
+    cwd.media.service:
+        class: Cwd\MediaBundle\Service\MediaService
+        arguments:
+          - "@entity_manager"
+          - "@logger"
+          - "%cwd.media.config%"
+
+    cwd.media.twig.image:
+        class: Cwd\MediaBundle\Twig\ImageExtension
+        arguments: [@cwd.media.service]
+        tags:
+            - { name: twig.extension }
+
+    cwd_image_type:
+        class:      Cwd\MediaBundle\Form\Type\ImageType
+        arguments: [@cwd.media.service]
+        tags:
+            - { name: form.type }
+
