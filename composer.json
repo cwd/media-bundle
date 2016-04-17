@@ -1,6 +1,5 @@
 {
   "name": "cwd/media-bundle",
-  "version": "1.0",
   "description": "",
   "keywords": ["symfony", "bundle"],
   "type": "symfony-bundle",
